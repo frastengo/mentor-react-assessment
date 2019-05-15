@@ -10,6 +10,7 @@ const GET_ALL_TODOS = "GET_ALL_TODOS"
 const ADD_TODO = "ADD_TODO"
 const DELETE_TODO = "DELETE_TODO"
 const EDIT_TODO = "EDIT_TODO"
+const PATCH_TODO = "PATCH_TODO"
 
 
 
@@ -73,6 +74,15 @@ export function editTodo(taskId){
     
     return {
         type: EDIT_TODO,
+        payload: todos
+    }
+}
+
+export function patchTodo(id, {title, description, completed}){
+    let todos = axios.patch(`https://practiceapi.devmountain.com/api/tasks/${id}`, {title, description, completed}).then(res => res.data)
+    
+    return {
+        type: PATCH_TODO,
         payload: todos
     }
 }
